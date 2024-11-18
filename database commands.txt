@@ -1,0 +1,82 @@
+Create the database   
+    CREATE DATABASE finalproj;
+    use finalproj;
+
+Create table 
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT(PK) NOT NULL,
+        full_name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        phone_number VARCHAR(15) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        role ENUM('customer', 'therapist', 'admin'),
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
+    );
+
+    CREATE TABLE services (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        service_id INT(PK) NOT NULL,
+        service_name VARCHAR(100) NOT NULL,
+        description TEXT,
+        duration INT,
+        price DECIMAL(10,2),
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
+    );
+
+    CREATE TABLE appointments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        appointment_id INT(PK) NOT NULL,
+        user_id INT(FK) NOT NULL,
+        therapist_id INT(FK) NOT NULL,
+        service_id INT(FK) NOT NULL,
+        appointment_date DATE,
+        start_time TIME,
+        end_time TIME,
+        status ENUM('pending', 'confirmed', 'completed', 'canceled'),
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
+    );
+
+    CREATE TABLE payments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        payment_id INT (PK) NOT NOLL,
+        appointment_id INT(FK) NOT NULL,
+        amount DECIMAL(10,2),
+        payment_method ENUM('cash', 'credit_card', 'paypal'),
+        payment_status ENUM('paid', 'unpaid', 'refunded'),
+        transaction_id VARCHAR(100),
+        payment_date TIMESTAMP
+    );
+
+    CREATE TABLE availability (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        availability_id INT(PK) NOT NULL,
+        therapist_id INT(FK) NOT NULL,
+        date DATE,
+        start_time TIME,
+        end_time TIME
+    );
+
+    CREATE TABLE reviews (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        review_id INT(PK) NOT NULL,
+        appointment_id INT(FK) NOT NULL,
+        user_id INT(FK),
+        rating INT,
+        comment TEXT,
+        created_at TIMESTAMP
+    );
+
+    CREATE TABLE promotions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        promo_id INT(PK) NOT NULL,
+        promo_code VARCHAR(50) NOT NULL,
+        description TEXT,
+        discount_percent DECIMAL (5,2),
+        start_date DATE,
+        end_date DATE
+    );
+    
