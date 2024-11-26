@@ -1,8 +1,8 @@
-Create the database   
+-- Create the database   
     CREATE DATABASE finalproj;
     use finalproj;
 
-Create table 
+-- Create tables
     CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100) NOT NULL,
