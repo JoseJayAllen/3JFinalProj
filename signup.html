@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Pasiar App</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #004d00;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #004d00;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .signup-button {
+            background-color: #004d00;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Create Account</div>
+        <form onsubmit="createAccount(event)">
+            <div class="form-group">
+                <input type="text" class="form-input" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-input" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" id="confirm-password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function createAccount(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            alert(`Account created for: ${username}\nEmail: ${email}`);
+        }
+    </script>
+</body>
+</html>

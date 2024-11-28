@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .guest-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .guest-row input, .guest-row select {
+      padding: 8px;
+      font-size: 14px;
+      flex: 1;
+    }
+    .add-remove-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .add-remove-buttons button {
+      font-size: 20px;
+      padding: 5px 10px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .add-remove-buttons button:hover {
+      background: #0056b3;
+    }
+    .submit-button {
+      width: 100%;
+      padding: 10px;
+      background: #4a3aff;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .submit-button:hover {
+      background: #3728d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>RESERVATION FORM</h1>
+    <div id="guest-container">
+      <div class="guest-row">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="number" name="age" placeholder="Age" min="0" required>
+        <select name="gender" required>
+          <option value="" disabled selected>Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="add-remove-buttons">
+      <button id="add-guest">+</button>
+      <button id="remove-guest">–</button>
+    </div>
+    <button class="submit-button" id="submit">Continue</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const guestContainer = document.getElementById('guest-container');
+      const addGuestButton = document.getElementById('add-guest');
+      const removeGuestButton = document.getElementById('remove-guest');
+
+      // Add new guest row
+      addGuestButton.addEventListener('click', function () {
+        const newGuestRow = document.createElement('div');
+        newGuestRow.className = 'guest-row';
+        newGuestRow.innerHTML = `
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="number" name="age" placeholder="Age" min="0" required>
+          <select name="gender" required>
+            <option value="" disabled selected>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        `;
+        guestContainer.appendChild(newGuestRow);
+      });
+
+      // Remove the last guest row
+      removeGuestButton.addEventListener('click', function () {
+        const guestRows = document.querySelectorAll('.guest-row');
+        if (guestRows.length > 1) {
+          guestContainer.removeChild(guestRows[guestRows.length - 1]);
+        }
+      });
+
+      // Handle form submission
+      document.getElementById('submit').addEventListener('click', function () {
+        const guests = [];
+        const guestRows = document.querySelectorAll('.guest-row');
+        guestRows.forEach(row => {
+          const name = row.querySelector('input[name="name"]').value;
+          const age = row.querySelector('input[name="age"]').value;
+          const gender = row.querySelector('select[name="gender"]').value;
+          guests.push({ name, age, gender });
+        });
+        console.log('Guest Information:', guests);
+        alert('Reservation submitted successfully!');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cottage Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .card-body {
+      padding: 16px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .card-location {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .card-info {
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .card-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #4caf50;
+      margin-bottom: 16px;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .button {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button-primary {
+      background: #4a3aff;
+      color: #fff;
+      border: none;
+    }
+    .button-secondary {
+      background: #f2f2f2;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="images/cottage.png" alt="Cottage">
+    <div class="card-body">
+      <div class="card-title">COTTAGE #24</div>
+      <div class="card-location">Dipalo River, Nangapugan, San Quintin, Pangasinan</div>
+      <div class="card-info">
+        <span>Visitors: 35</span><br>
+        Good for 5-8 PAX
+      </div>
+      <div class="card-price">₱150</div>
+      <div class="buttons">
+        <a href="#" class="button button-primary">Reserve Now</a>
+        <a href="dipalo.html" class="button button-secondary">No, Thanks</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

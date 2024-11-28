@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasiar - Discover Our Place</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #2e7d32;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .search-bar svg {
+            width: 20px;
+            height: 20px;
+            fill: #2e7d32;
+        }
+
+        h2 {
+            margin: 20px 0;
+        }
+
+        .place {
+            margin: 10px 0;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .place img {
+            width: 100%;
+            height: auto;
+        }
+
+        .place-info {
+            padding: 10px;
+        }
+
+        .place-info h3 {
+            font-size: 18px;
+            color: #000;
+        }
+
+        .place-info p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .get-started {
+            margin-top: 20px;
+            background-color: #1a237e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="images/P__6_-removebg-preview 1.png" alt="Pasiar Logo">
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7.5" stroke="#2e7d32" stroke-width="2" fill="none"></circle><line x1="16" y1="16" x2="22" y2="22" stroke="#2e7d32" stroke-width="2"></line></svg>
+    </div>
+    <h2>Discover our place</h2>
+    <div class="place">
+        <img src="images/Frame 23.png" alt="Dipalo River Park">
+        <div class="place-info">
+            <h3>DIPALO RIVER PARK</h3>
+            <p>Niangapugan San Quintin, Pangasinan</p>
+        </div>
+    </div>
+    <div class="place">
+        <img src="images/Group.png" alt="Ramirez Picnic Garden Resort">
+        <div class="place-info">
+            <h3>RAMIREZ PICNIC GARDEN RESORT</h3>
+            <p>Cabalaoangan San Quintin, Pangasinan</p>
+        </div>
+    </div>
+    <button>
+        <a href="explore.html"class="get-started">Get Started</a>
+    </button>
+</body>
+</html>

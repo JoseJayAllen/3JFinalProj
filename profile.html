@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            width: 350px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+            text-align: center;
+        }
+        .profile-header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .profile-header .back-icon {
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            color: #333;
+            cursor: pointer;
+        }
+        .profile-header .edit-btn {
+            position: absolute;
+            right: 0;
+            font-size: 1rem;
+            color: #4a00ff;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 10px;
+            border: 4px solid #f8f8f8;
+            position: relative;
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-image input {
+            display: none;
+        }
+        .upload-btn {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: #4a00ff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .profile-info div {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .profile-info label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .profile-info span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .profile-info input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .btn-save {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            background: #4a00ff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <span class="back-icon" onclick="goBack()">&#x2190;</span>
+            
+            <button class="edit-btn">Edit</button>
+        </div>
+        <div class="profile-image">
+            <img id="profile-pic" src="images/P__6_-removebg-preview 1.png" alt="Profile Picture"> <!-- Replace with default image -->
+            <input type="file" id="upload-photo" accept="image/*">
+            <button class="upload-btn" onclick="document.getElementById('upload-photo').click();">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+        <div class="profile-info">
+            <div>
+                <label>Username</label>
+                <span id="username-view">Sophia Kaisa Dela Cruz</span>
+                <input type="text" id="username-edit" value="Sophia Kaisa Dela Cruz">
+            </div>
+            <div>
+                <label>Email</label>
+                <span id="email-view">SK.Delacruz@gmail.com</span>
+                <input type="email" id="email-edit" value="SK.Delacruz@gmail.com">
+            </div>
+            <div>
+                <label>Phone</label>
+                <span id="phone-view">+63 0123456789</span>
+                <input type="tel" id="phone-edit" value="+63 0123456789">
+            </div>
+            <div>
+                <label>Date of Birth</label>
+                <span id="dob-view">March 27, 1989</span>
+                <input type="date" id="dob-edit" value="1989-03-27">
+            </div>
+            <div>
+                <label>Address</label>
+                <span id="address-view">6391 Nancayasan Urdaneta City</span>
+                <input type="text" id="address-edit" value="6391 Nancayasan Urdaneta City">
+            </div>
+            <div>
+                <label>Account</label>
+                <span id="account-view">Premium</span>
+                <input type="text" id="account-edit" value="Premium">
+            </div>
+        </div>
+        <button class="btn-save">Save</button>
+    </div>
+    <script>
+        const editButton = document.querySelector('.edit-btn');
+        const saveButton = document.querySelector('.btn-save');
+        const spans = document.querySelectorAll('span');
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"]');
+
+        editButton.addEventListener('click', () => {
+            // Switch to edit mode
+            spans.forEach(span => (span.style.display = 'none'));
+            inputs.forEach(input => (input.style.display = 'block'));
+            saveButton.style.display = 'block';
+            editButton.style.display = 'none';
+        });
+
+        saveButton.addEventListener('click', () => {
+            // Save changes and switch back to view mode
+            inputs.forEach(input => {
+                const id = input.id.replace('-edit', '-view');
+                document.getElementById(id).textContent = input.value;
+                input.style.display = 'none';
+            });
+            spans.forEach(span => (span.style.display = 'block'));
+            saveButton.style.display = 'none';
+            editButton.style.display = 'block';
+
+            alert('Changes saved!');
+        });
+
+        const photoInput = document.getElementById('upload-photo');
+        const profilePic = document.getElementById('profile-pic');
+
+        photoInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

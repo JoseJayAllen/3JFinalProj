@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasiar - Travel Tips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .loader div {
+            width: 10px;
+            height: 10px;
+            background-color: #2e7d32;
+            border-radius: 50%;
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        .loader div:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader div:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+
+        .content {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            margin-top: 30px;
+        }
+
+        .images {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .images img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .description {
+            color: #2e7d32;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="content">
+        <div class="logo">
+            <img src="images/P__6_-removebg-preview 1.png" alt="Pasiar Logo" style="width: 150px;">
+        </div>
+        <h1>Find best place for your journey</h1>
+        <div class="images">
+            <img src="https://media.cntraveler.com/photos/598339c9b7a86962e8e27c5d/master/pass/Paris_GettyImages-601763009.jpg" alt="Travel 1">
+            <img src="https://travelingcanucks.com/wp-content/uploads/2017/05/Traveling_Canucks_Travel_Photography_005.jpg" alt="Travel 2">
+            <img src="https://th.bing.com/th/id/OIP.yy06KdzagGxvP2dk1vxcLwHaEh?w=971&h=593&rs=1&pid=ImgDetMain" alt="Travel 3">
+            <img src="https://media2.popsugar-assets.com/files/thumbor/OS81vOwzdZ9NZBYiS8ZPrs4jz5Q=/fit-in/1024x1024/2014/02/17/843/n/1922441/188193e9a2917c8e_thumb_temp_image215902961329390326.jpg" alt="Travel 4">
+            <img src="https://th.bing.com/th/id/OIP.pi777_IgMLolCNeNCXwUhwHaF-?w=1500&h=1211&rs=1&pid=ImgDetMain" alt="Travel 5">
+        </div>
+        <p class="description">
+            We're happy to share our best tips for destinations where you can relax. But you find the nicest city trips as well!
+        </p>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.querySelector(".loader").style.display = "none";
+            document.querySelector(".content").style.display = "block";
+            document.body.style.overflow = "auto";
+
+            // Redirect to another local HTML file after 5 seconds
+            setTimeout(() => {
+                window.location.href = "discover.html"; // Replace with your local file name
+            }, 5000); // 5000 milliseconds = 5 seconds
+        });
+    </script>
+</body>
+</html>

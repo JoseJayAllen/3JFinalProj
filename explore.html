@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - Pasiar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #2e7d32;
+            padding: 20px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2e7d32;
+            color: #ffffff;
+            padding: 20px;
+            transition: right 0.3s;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .menu h2 {
+            margin-bottom: 20px;
+        }
+        .menu a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .menu a:hover {
+            text-decoration: underline;
+        }
+        .resort-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .resort-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .resort-card img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .resort-card .overlay {
+            position: relative;
+            top: -150px;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 20px;
+            text-align: center;
+            line-height: 150px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="icon" onclick="toggleMenu()">&#9776;</span> <!-- Menu Icon -->
+        <h1>Explore</h1>
+        <span class="icon" onclick="goBack()">&#x2190;</span> <!-- Working Back Arrow Icon -->
+    </div>
+
+    <div class="menu" id="menu">
+        <h2>Menu</h2>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Log Out</a>
+    </div>
+
+    <div class="resort-card">
+        <a href="dipalo.html">
+            <img src="https://sa.kapamilya.com/absnews/abscbnnews/media/2019/life/03/07/20190307_diaplo.jpg" alt="Dipalo River Park">
+            <div class="overlay">Dipalo River Park</div>
+        </a>
+    </div>
+    <div class="resort-card">
+        <a href="ramirez-picnic-garden.html">
+            <img src="https://seepangasinan.com/wp-content/uploads/2022/06/Ramirez-Picnic-Garnde-Resort-04.jpg" alt="Ramirez Picnic Garden Resort">
+            <div class="overlay">Ramirez Picnic Garden Resort</div>
+        </a>
+    </div>
+    <div class="resort-card">
+        <a href="carmesis-farm-resort.html">
+            <img src="https://i.ytimg.com/vi/qh9JH5qj3tg/hqdefault.jpg" alt="Carmesis Farm Resort">
+            <div class="overlay">Carmesis Farm Resort</div>
+        </a>
+    </div>
+    <div class="resort-card">
+        <a href="caraballo-spring-resort.html">
+            <img src="https://pix6.agoda.net/hotelImages/547/547974/547974_14030416290018541773.jpg?s=1100x825" alt="Caraballo Spring Resort">
+            <div class="overlay">Caraballo Spring Resort</div>
+        </a>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            if (menu.style.right === "0px") {
+                menu.style.right = "-250px";
+            } else {
+                menu.style.right = "0px"; 
+            }
+        }
+    </script>
+</body>
+</html>

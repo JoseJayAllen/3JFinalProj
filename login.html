@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasiar App - Login</title>
+    <style>
+        /* Your existing styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+        }
+        .logo img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #004d00;
+            margin-bottom: 20px;
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .social-button {
+            background-color: #0000ff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .divider {
+            color: #aaa;
+            margin: 10px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #004d00;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .forgot-password {
+            text-align: right;
+            color: #004d00;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .login-button {
+            background-color: #004d00;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .signup {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .signup a {
+            color: #004d00;
+            text-decoration: none;
+        }
+        .logo img {
+            height: 250px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- Replace 'logo.png' with the actual path to your logo image -->
+            <img src="images/P__6_-removebg-preview 1.png" alt="Pasiar Logo">
+        </div>
+        <div class="title">PASiAR</div>
+        <div class="social-buttons">
+            <button class="social-button" style="background-color: #3b5998;" onclick="facebookLogin()">
+                Facebook
+            </button>
+            <button class="social-button" style="background-color: #1da1f2;" onclick="twitterLogin()">
+                Twitter
+            </button>
+        </div>
+        <div class="divider">or log in with email</div>
+        <form onsubmit="emailLogin(event)">
+            <div class="form-group">
+                <input type="email" class="form-input" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" id="password" placeholder="Password" required>
+                <div class="forgot-password">Forgot password?</div>
+            </div>
+            <!--<button type="submit" class="login-button">Log In</button>-->
+            <button>
+                <a href="loading.html">Log In</a>
+            </button>
+        </form>
+        <div class="signup">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Load the Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" 
+        src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        // Initialize the Facebook SDK once the script is loaded
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_FACEBOOK_APP_ID', // Replace with your Facebook App ID
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        function facebookLogin() {
+            // Ensure FB.init has been called before invoking FB.login
+            if (typeof FB !== 'undefined' && FB) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        console.log('Welcome! Fetching your information....');
+                        FB.api('/me', function(response) {
+                            console.log('Good to see you, ' + response.name + '.');
+                            alert('Logged in as: ' + response.name);
+                        });
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                }, {scope: 'public_profile,email'});
+            } else {
+                console.error('Facebook SDK not initialized properly.');
+            }
+        }
+    </script>
+
+    <!-- Your scripts for Twitter and email login -->
+    <script>
+        function twitterLogin() {
+            alert("Twitter login functionality is not implemented yet.");
+        }
+
+        function emailLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            alert(`Email: ${email}\nPassword: ${password}\nEmail login functionality is not implemented yet.`);
+        }
+    </script>
+</body>
+</html>
