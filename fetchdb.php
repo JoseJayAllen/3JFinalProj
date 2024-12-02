@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require 'database.php';
 
 // Fetch services
 function getServices($pdo) {
