@@ -42,16 +42,16 @@ $testimonials = getTestimonials($pdo);
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
+    <!-- Reviews -->
+    <section class="review">
         <h2>What Our Customers Say</h2>
-        <div class="testimonials-slider">
-            <?php foreach ($testimonials as $testimonial): ?>
-                <div class="testimonial-card">
-                    <img src="images/<?php echo $testimonial['photo'] ?? 'default-user.png'; ?>" alt="<?php echo $testimonial['customer_name']; ?>">
-                    <h3><?php echo $testimonial['customer_name']; ?></h3>
-                    <p>Rating: <?php echo $testimonial['rating']; ?>/5</p>
-                    <p>"<?php echo $testimonial['comment']; ?>"</p>
+        <div class="review-slider">
+            <?php foreach ($reviews as $review): ?>
+                <div class="reviews-card">
+                    <img src="images/<?php echo $reviews['photo'] ?? 'default-user.png'; ?>" alt="<?php echo $reviews['customer_name']; ?>">
+                    <h3><?php echo $reviews['customer_name']; ?></h3>
+                    <p>Rating: <?php echo $reviews['rating']; ?>/5</p>
+                    <p>"<?php echo $reviews['comment']; ?>"</p>
                 </div>  
             <?php endforeach; ?>
         </div>
