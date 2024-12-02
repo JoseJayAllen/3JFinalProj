@@ -1,9 +1,8 @@
 <?php
 require 'fetchdb.php';
 
-// Fetch data
 $services = getServices($pdo);
-$testimonials = getTestimonials($pdo);
+$reviews = getReviews($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,19 +13,17 @@ $testimonials = getTestimonials($pdo);
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero-section" style="background-image: url('images/hero.jpg');">
+    <header class="hero-section">
         <div class="hero-content">
             <h1>Your Wellness Journey Starts Here</h1>
             <p>Relax, rejuvenate, and refresh with our premium spa services.</p>
             <div class="cta-buttons">
-                <a href="booking.php" class="btn-primary">Book Now</a>
+                <a href="book.php" class="btn-primary">Book Now</a>
                 <a href="services.php" class="btn-secondary">View Services</a>
             </div>
         </div>
     </header>
 
-    <!-- Services Overview -->
     <section class="services-overview">
         <h2>Our Popular Services</h2>
         <div class="services-grid">
@@ -42,14 +39,12 @@ $testimonials = getTestimonials($pdo);
         </div>
     </section>
 
-    <!-- Reviews -->
     <section class="review">
         <h2>What Our Customers Say</h2>
         <div class="review-slider">
             <?php foreach ($reviews as $review): ?>
                 <div class="reviews-card">
-                    <img src="images/<?php echo $reviews['photo'] ?? 'default-user.png'; ?>" alt="<?php echo $reviews['customer_name']; ?>">
-                    <h3><?php echo $reviews['customer_name']; ?></h3>
+                    <h3><?php echo $reviews['user_id']; ?></h3>
                     <p>Rating: <?php echo $reviews['rating']; ?>/5</p>
                     <p>"<?php echo $reviews['comment']; ?>"</p>
                 </div>  

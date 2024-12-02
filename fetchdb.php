@@ -1,15 +1,13 @@
 <?php
 require 'database.php';
 
-// Fetch services
 function getServices($pdo) {
-    $stmt = $pdo->query("SELECT service_name, price, description, image FROM services LIMIT 6");
+    $stmt = $pdo->query("SELECT service_name, price, description");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Fetch testimonials
-function getTestimonials($pdo) {
-    $stmt = $pdo->query("SELECT customer_name, rating, comment, photo FROM reviews LIMIT 5");
+function getReviews($pdo) {
+    $stmt = $pdo->query("SELECT user_id, rating, comment");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
