@@ -111,3 +111,67 @@ button:hover {
     padding: 20px;
     border-radius: 5px;
 }
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.appointment-card {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-card p {
+    margin: 5px 0;
+}
+
+.appointment-card button {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.appointment-card button:hover {
+    background-color: #45a049;
+}
+
+.dashboard-main .dashboard-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+    .dashboard-main .dashboard-section {
+        flex-direction: row;
+    }
+
+    .appointment-card {
+        flex: 1 1 45%; /* Each card takes 45% of the space, so 2 cards per row */
+    }
+}
+
+@media (min-width: 1024px) {
+    .appointment-card {
+        flex: 1 1 30%; /* On larger screens, 3 cards per row */
+    }
+}
+
