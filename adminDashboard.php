@@ -7,17 +7,22 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$bookingsQuery = "SELECT * FROM bookings ORDER BY booking_date DESC";
-$bookingsResult = $conn->query($bookingsQuery);
+// Adjusted to prepared to prevent SQL injection
+$bookingsQuery = $conn->prepare("SELECT * FROM bookings ORDER BY booking_date DESC");
+$bookingsQuery->execute();
+$bookingsResult = $bookingsQuery->get_result();
 
-$servicesQuery = "SELECT * FROM services";
-$servicesResult = $conn->query($servicesQuery);
+$servicesQuery = $conn->prepare("SELECT * FROM services");
+$servicesQuery->execute();
+$servicesResult = $servicesQuery->get_result();
 
-$availabilityQuery = "SELECT * FROM therapist_availability";
-$availabilityResult = $conn->query($availabilityQuery);
+$availabilityQuery = $conn->prepare("SELECT * FROM therapist_availability");
+$availabilityQuery->execute();
+$availabilityResult = $availabilityQuery->get_result();
 
-$paymentsQuery = "SELECT * FROM payments ORDER BY payment_date DESC";
-$paymentsResult = $conn->query($paymentsQuery);
+$paymentsQuery = $conn->prepare("SELECT * FROM payments ORDER BY payment_date DESC");
+$paymentsQuery->execute();
+$paymentsResult = $paymentsQuery->get_result();
 
 ?>
 
