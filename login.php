@@ -3,29 +3,35 @@ require 'database.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate input fields
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $error = "Please fill in all fields.";
     } else {
         $email = $conn->real_escape_string($_POST['email']);
         $password = $_POST['password'];
 
-        // Check if the user exists
+        // Fetch user details
         $query = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($query);
 
-        if ($result->num_rows === 1) {
+        if ($result && $result->num_rows === 1) {
             $user = $result->fetch_assoc();
 
-            // Verify password
+            // Debugging: Output the role fetched from the database
+            error_log("Role for user with email $email: " . $user['role']);
+
             if (password_verify($password, $user['password'])) {
-                // Set session variables
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['full_name'] = $user['full_name'];
                 $_SESSION['role'] = $user['role'];
 
-                // Redirect to dashboard
-                header("Location: userDashboard.php");
+                // Redirect based on role
+                if ($user['role'] === 'therapist') {
+                    header("Location: adminDashboard.php");
+                } elseif ($user['role'] === 'customer') {
+                    header("Location: userDashboard.php");
+                } else {
+                    $error = "Invalid role assigned. Contact the administrator.";
+                }
                 exit();
             } else {
                 $error = "Invalid password. Please try again.";

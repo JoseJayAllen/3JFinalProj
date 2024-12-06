@@ -38,15 +38,14 @@ $conn->close();
     <title>Wellness Spa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom CSS for color palette and typography */
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f0f8f1; /* Light greenish background for wellness feel */
+            background-color: #f0f8f1; 
         }
 
         .hero-section {
             color: white;
-            background-color: #2e7d32; /* Calming green background */
+            background-color: #2e7d32; 
         }
 
         .hero-section h1 {
@@ -59,17 +58,17 @@ $conn->close();
         }
 
         .service-card {
-            background-color: #fff9f1; /* Soft earth tone background */
+            background-color: #fff9f1; 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
 
         .service-card h3 {
-            color: #2e7d32; /* Green for headings */
+            color: #2e7d32; 
         }
 
         .review-card {
-            background-color: #f4f8f4; /* Light soft background */
+            background-color: #f4f8f4;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -77,7 +76,7 @@ $conn->close();
 
         .review-card h3 {
             font-size: 1.25rem;
-            color: #388e3c; /* Green for user names */
+            color: #388e3c; 
         }
 
         .review-card p {
@@ -86,7 +85,7 @@ $conn->close();
         }
 
         .cta-section {
-            background-color: #388e3c; /* Soft green */
+            background-color: #388e3c; 
             color: white;
         }
 
@@ -111,9 +110,28 @@ $conn->close();
         .cta-section a:hover {
             background-color: #f4f8f4;
         }
+
+        .login-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #388e3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-button:hover {
+            background-color: #2e7d32;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
+    <!-- Login Button at the top-right -->
+    <a href="login.php" class="login-button">Login</a>
 
     <header class="hero-section bg-cover bg-center h-screen flex items-center justify-center text-center" style="background-image: url('img/bg.jpg');">
         <div class="bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl">

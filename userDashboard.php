@@ -2,24 +2,65 @@
 session_start();
 include('database.php');
 
-// Get the logged-in user's ID from the session
-$user_id = $_SESSION['user_id']; 
+// Check if user_id is set in the session
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if user is not logged in
+    header("Location: login.php");
+    exit();
+}
 
-// Query for user information
-$query = "SELECT full_name, email, phone_number FROM users WHERE user_id = $user_id";
-$result = $conn->query($query);
+// Get the logged-in user's ID from the session
+$user_id = $_SESSION['user_id'];
+
+// Sanitize the user_id to prevent SQL injection
+$user_id = (int) $user_id;  // Cast to integer to ensure it is safe
+
+// Query for user information using prepared statement to avoid SQL injection
+$query = $conn->prepare("SELECT full_name, email, phone_number FROM users WHERE user_id = ?");
+$query->bind_param("i", $user_id);
+$query->execute();
+$result = $query->get_result();
 $user = $result->fetch_assoc();
-$username = $user['full_name'];
-$email = $user['email'];
-$phone_number = $user['phone_number'];
+
+// Check if user data is found
+if ($user) {
+    $username = $user['full_name'];
+    $email = $user['email'];
+    $phone_number = $user['phone_number'];
+} else {
+    // Redirect to login page if user data is not found
+    header("Location: login.php");
+    exit();
+}
 
 // Query for upcoming appointments
-$upcomingAppointmentsQuery = "SELECT * FROM appointments WHERE user_id = $user_id AND appointment_date >= CURDATE() ORDER BY appointment_date ASC";
-$upcomingAppointmentsResult = $conn->query($upcomingAppointmentsQuery);
+$upcomingAppointmentsQuery = $conn->prepare("SELECT * FROM appointments WHERE user_id = ? AND appointment_date >= CURDATE() ORDER BY appointment_date ASC");
+$upcomingAppointmentsQuery->bind_param("i", $user_id);
+$upcomingAppointmentsQuery->execute();
+$upcomingAppointmentsResult = $upcomingAppointmentsQuery->get_result();
 
 // Query for past appointments
-$pastAppointmentsQuery = "SELECT * FROM appointments WHERE user_id = $user_id AND appointment_date < CURDATE() ORDER BY appointment_date DESC";
-$pastAppointmentsResult = $conn->query($pastAppointmentsQuery);
+$pastAppointmentsQuery = $conn->prepare("SELECT * FROM appointments WHERE user_id = ? AND appointment_date < CURDATE() ORDER BY appointment_date DESC");
+$pastAppointmentsQuery->bind_param("i", $user_id);
+$pastAppointmentsQuery->execute();
+$pastAppointmentsResult = $pastAppointmentsQuery->get_result();
+
+// Handle review submission
+if (isset($_POST['submit_review'])) {
+    $appointment_id = $_POST['appointment_id'];
+    $rating = $_POST['rating'];
+    $comment = $_POST['comment'];
+
+    // Insert the review into the database using prepared statements
+    $reviewQuery = $conn->prepare("INSERT INTO reviews (appointment_id, user_id, rating, comment) VALUES (?, ?, ?, ?)");
+    $reviewQuery->bind_param("iiis", $appointment_id, $user_id, $rating, $comment);
+    
+    if ($reviewQuery->execute()) {
+        echo "Review submitted successfully!";
+    } else {
+        echo "Error: " . $reviewQuery->error;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +115,20 @@ $pastAppointmentsResult = $conn->query($pastAppointmentsQuery);
                         <div class="appointment-card">
                             <p><strong>Date:</strong> <?php echo $appointment['appointment_date']; ?></p>
                             <p><strong>Therapist:</strong> <?php echo $appointment['therapist_id']; ?></p>
-                            <button>Leave a Review</button>
+                            
+                            <!-- Add the review form -->
+                            <?php if (empty($appointment['review_id'])): ?>
+                                <form action="userDashboard.php" method="POST">
+                                    <input type="hidden" name="appointment_id" value="<?php echo $appointment['appointment_id']; ?>">
+                                    <label for="rating_<?php echo $appointment['appointment_id']; ?>">Rating:</label>
+                                    <input type="number" id="rating_<?php echo $appointment['appointment_id']; ?>" name="rating" min="1" max="5" required>
+                                    <label for="comment_<?php echo $appointment['appointment_id']; ?>">Comment:</label>
+                                    <textarea id="comment_<?php echo $appointment['appointment_id']; ?>" name="comment" required></textarea>
+                                    <button type="submit" name="submit_review">Submit Review</button>
+                                </form>
+                            <?php else: ?>
+                                <p>You already submitted a review for this appointment.</p>
+                            <?php endif; ?>
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -141,7 +195,7 @@ $pastAppointmentsResult = $conn->query($pastAppointmentsQuery);
             </section>
         </main>
     </div>
-
+    
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -269,6 +323,18 @@ $pastAppointmentsResult = $conn->query($pastAppointmentsQuery);
             cursor: pointer;
         }
     </style>
+
+    <script>
+    function openReviewPopup(appointmentId) {
+        document.getElementById('appointment_id').value = appointmentId;
+        document.getElementById('reviewPopup').style.display = 'block';
+    }
+
+    function closeReviewPopup() {
+        document.getElementById('reviewPopup').style.display = 'none';
+    }
+    </script>
+
 </body>
 </html>
 

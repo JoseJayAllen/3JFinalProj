@@ -63,6 +63,11 @@ $therapists = $therapists_result->fetch_all(MYSQLI_ASSOC);
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
+    <!-- Back Button -->
+    <a href="index.php" class="absolute top-4 left-4 bg-green-500 text-white py-2 px-4 rounded-lg">
+        Back to Home
+    </a>
+
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-3xl font-bold text-center mb-6 text-green-600">Book an Appointment</h1>
         <form id="booking-form" method="POST" action="booking.php">
@@ -130,18 +135,6 @@ $therapists = $therapists_result->fetch_all(MYSQLI_ASSOC);
                 <button type="submit" name="confirm_booking" value="1" class="bg-green-500 text-white py-2 px-4 rounded-lg">Confirm Appointment</button>
             </div>
         </form>
-        <a href="index.php" class="mt-6 inline-block text-blue-500">Back to Home</a>
-    </div>
-
-    <div id="confirmation-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 class="text-xl font-bold mb-4 text-gray-700">Booking Confirmation</h2>
-            <p class="mb-4 text-gray-600">Your booking has been confirmed. Do you want to book another appointment or go back home?</p>
-            <div class="flex justify-between">
-                <button class="bg-blue-500 text-white py-2 px-4 rounded-lg" onclick="bookAgain()">Book Again</button>
-                <button class="bg-gray-500 text-white py-2 px-4 rounded-lg" onclick="goHome()">Go Home</button>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -187,31 +180,16 @@ $therapists = $therapists_result->fetch_all(MYSQLI_ASSOC);
         }
 
         function updateSummary() {
-            const service = document.getElementById("service");
-            const therapist = document.getElementById("therapist");
-            const date = document.getElementById("date");
-            const time = document.getElementById("time");
+            const serviceSelect = document.getElementById("service");
+            const therapistSelect = document.getElementById("therapist");
+            const dateInput = document.getElementById("date");
+            const timeSelect = document.getElementById("time");
 
-            document.getElementById("summary-service").textContent = service.options[service.selectedIndex].text;
-            document.getElementById("summary-therapist").textContent = therapist.options[therapist.selectedIndex].text;
-            document.getElementById("summary-date").textContent = date.value;
-            document.getElementById("summary-time").textContent = time.value;
-        }
-
-        function showConfirmationModal() {
-            document.getElementById("confirmation-modal").classList.remove("hidden");
-        }
-
-        function bookAgain() {
-            document.getElementById("confirmation-modal").classList.add("hidden");
-            document.getElementById("booking-form").reset();
-            document.getElementById("step-1").classList.remove("hidden");
-        }
-
-        function goHome() {
-            window.location.href = "index.php";
+            document.getElementById("summary-service").textContent = serviceSelect.options[serviceSelect.selectedIndex]?.text || "";
+            document.getElementById("summary-therapist").textContent = therapistSelect.options[therapistSelect.selectedIndex]?.text || "";
+            document.getElementById("summary-date").textContent = dateInput.value || "";
+            document.getElementById("summary-time").textContent = timeSelect.value || "";
         }
     </script>
 </body>
 </html>
-
